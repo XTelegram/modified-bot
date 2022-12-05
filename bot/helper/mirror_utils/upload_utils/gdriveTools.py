@@ -6,7 +6,7 @@ from json import loads as jsnloads
 from os import makedirs, path as ospath, listdir, remove as osremove
 from requests.utils import quote as rquote
 from io import FileIO
-from re import search as re_search
+from re import search as re_search, match as re_match
 from urllib.parse import parse_qs, urlparse
 from random import randrange
 from google.oauth2 import service_account
@@ -214,8 +214,12 @@ class GoogleDriveHelper:
         try:
             if ospath.isfile(file_path):
                 mime_type = get_mime_type(file_path)
-                link = self.__upload_file(file_path, file_name, mime_type, config_dict['GDRIVE_ID'])
-                if self.__is_cancelled:
+                if re_match(r'text/html|text/plain', str(mime_type)):
+                    LOGGER.info(f"Upload cancelled because: mimeType = {mime_type}")
+                    self.__listener.onUploadError("ERROR: direct link not found!")
+                    return
+                link = self.__upload_file(file_path, file_name, mime_type, parent_id)
+                if self.is_cancelled:
                     return
                 if link is None:
                     raise Exception('Upload has been manually cancelled')
