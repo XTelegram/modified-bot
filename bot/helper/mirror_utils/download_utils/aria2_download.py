@@ -57,9 +57,9 @@ def __onDownloadStarted(api, gid):
                     if config_dict['TELEGRAPH_STYLE']:
                         smsg, button = GoogleDriveHelper().drive_list(sname, True)
                         if smsg:
-                            listener.onDownloadError('Someone already mirrored it for you !\n\n')
+                            listener.onDownloadError('⚠️ File/Folder sudah ada 🤗\n\n')
                             api.remove([download], force=True, files=True)
-                            return sendMarkup("Here you go:", listener.bot, listener.message, button)
+                            return sendMarkup("Cek Disini", listener.bot, listener.message, button)
                     else:
                         cap, f_name = GoogleDriveHelper().drive_list(sname, True)
                         if cap:
