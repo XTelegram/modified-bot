@@ -274,9 +274,9 @@ class MirrorLeechListener:
 
         NAME_FONT = config_dict['NAME_FONT']
         if config_dict['EMOJI_THEME']:
-            slmsg = f"🗂️ Name: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
-            slmsg += f"📐 Size: {size}\n"
-            slmsg += f"👥 Added by: {self.tag} | <code>{self.user_id}</code>\n\n"
+            slmsg = f"🔤  Nama: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
+            slmsg += f"📦  Ukuran: {size}\n"
+            slmsg += f"👥 diTambahkan Oleh: {self.tag}\n#️⃣ UID:. <code>{self.user_id}</code>\n\n"
         else:
             slmsg = f"Name: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
             slmsg += f"Size: {size}\n"
@@ -372,7 +372,7 @@ class MirrorLeechListener:
                 reply_to.delete()
 
         if config_dict['EMOJI_THEME']:
-            msg = f"<b>╭🗂️ Name: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n<b>├📐 Size: </b>{size}"
+            msg = f"<b>🔤 ️ Nama: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n<b>📦  Ukuran: </b>{size}"
         else:
             msg = f"<b>╭ Name: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n<b>├ Size: </b>{size}"
 
@@ -385,13 +385,13 @@ class MirrorLeechListener:
                             title=f"{config_dict['TITLE_NAME']} Source Link",
                             content=mesg,
                         )["path"]
-                        buttons.buildbutton(f"🔗 Source Link", f"https://telegra.ph/{link}")
+                        buttons.buildbutton(f"🔗 Sumber", f"https://telegra.ph/{link}")
                     elif is_url(mesg):
                         source_link = mesg
                         if source_link.startswith(("|", "pswd: ")):
                             pass
                         else:
-                            buttons.buildbutton(f"🔗 Source Link", source_link)
+                            buttons.buildbutton(f"🔗 Sumber", source_link)
                     else:
                         pass
                 except Exception:
@@ -406,9 +406,9 @@ class MirrorLeechListener:
                                     title=f"{config_dict['TITLE_NAME']} Source Link",
                                     content=source_link,
                                 )["path"]
-                                buttons.buildbutton(f"🔗 Source Link", f"https://telegra.ph/{link}")
+                                buttons.buildbutton(f"🔗 Sumber", f"https://telegra.ph/{link}")
                             else:
-                                buttons.buildbutton(f"🔗 Source Link", source_link)
+                                buttons.buildbutton(f"🔗 Sumber", source_link)
                     except Exception:
                         pass
             else:
@@ -424,17 +424,17 @@ class MirrorLeechListener:
                 botstart = ''
 
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>├📚 Total Files: </b>{folders}'
+                msg += f'\n<b>📚  Jumlah Files: </b>{folders}'
             else:
                 msg += f'\n<b>├ Total Files: </b>{folders}'
             if typ != 0:
                 if config_dict['EMOJI_THEME']:
-                    msg += f'\n<b>├💀 Corrupted Files: </b>{typ}'
+                    msg += f'\n<b>💀  Corrupted Files: </b>{typ}'
                 else:
                     msg += f'\n<b>├ Corrupted Files: </b>{typ}'
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 #Leech_by: </b>{self.tag}\n\n'
+                msg += f'\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>👤  diUpload Oleh: </b>{self.tag}\n\n'
             else: 
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
                 msg += f'\n<b>╰ #Leech_by: </b>{self.tag}\n\n'
@@ -490,19 +490,19 @@ class MirrorLeechListener:
 
         else:
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>├📦 Type: </b>{typ}'
+                msg += f'\n<b>❓ Jenis: </b>{typ}'
             else:
                 msg += f'\n<b>├ Type: </b>{typ}'
             if typ == "Folder":
                 if config_dict['EMOJI_THEME']:
-                    msg += f'\n<b>├🗃️ SubFolders: </b>{folders}'
-                    msg += f'\n<b>├🗂️ Files: </b>{files}'
+                    msg += f'\n<b>🗃️  SubFolders: </b>{folders}'
+                    msg += f'\n<b>📁️  Files: </b>{files}'
                 else:
                     msg += f'\n<b>├ SubFolders: </b>{folders}'
                     msg += f'\n<b>├ Files: </b>{files}'
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>├⌛ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-                msg += f'\n<b>╰👤 #Mirror_By: </b>{self.tag}\n\n'
+                msg += f'\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n<b>👤  diMirror Oleh: </b>{self.tag}\n\n'
             else:
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
                 msg += f'\n<b>╰ #Mirror_By: </b>{self.tag}\n\n' 
@@ -511,7 +511,7 @@ class MirrorLeechListener:
             if config_dict['DISABLE_DRIVE_LINK'] and self.message.chat.type != 'private':
                 pass
             else:
-                buttons.buildbutton("☁️ Drive Link", link)
+                buttons.buildbutton("☁️ G-Drive Link", link)
             LOGGER.info(f'Done Uploading {name}')
             if INDEX_URL:= config_dict['INDEX_URL']:
                 url_path = rutils.quote(f'{name}')
@@ -519,10 +519,10 @@ class MirrorLeechListener:
                 if typ == "Folder":
                     share_url += '/'
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("📥 Download", share_url)
                 else:
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("📥 Download", share_url)
                     if config_dict['VIEW_LINK']:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
                         share_urls = short_url(share_urls)
@@ -535,13 +535,13 @@ class MirrorLeechListener:
                                     title=f"{config_dict['TITLE_NAME']} Source Link",
                                     content=mesg,
                                 )["path"]
-                                buttons.buildbutton(f"🔗 Source Link", f"https://telegra.ph/{link}")
+                                buttons.buildbutton(f"🔗 Sumber", f"https://telegra.ph/{link}")
                             elif is_url(mesg):
                                 source_link = mesg
                                 if source_link.startswith(("|", "pswd: ")):
                                     pass
                                 else:
-                                    buttons.buildbutton(f"🔗 Source Link", source_link)
+                                    buttons.buildbutton(f"🔗 Sumber", source_link)
                             else:
                                 pass
                         except Exception:
@@ -556,9 +556,9 @@ class MirrorLeechListener:
                                             title=f"{config_dict['TITLE_NAME']} Source Link",
                                             content=source_link,
                                         )["path"]
-                                        buttons.buildbutton(f"🔗 Source Link", f"https://telegra.ph/{link}")
+                                        buttons.buildbutton(f"🔗 Sumber", f"https://telegra.ph/{link}")
                                     else:
-                                        buttons.buildbutton(f"🔗 Source Link", source_link)
+                                        buttons.buildbutton(f"🔗 Sumber", source_link)
                             except Exception:
                                 pass
                     else:
