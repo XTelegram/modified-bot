@@ -17,7 +17,7 @@ from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_excep
 from bot.helper.ext_utils.html_helper import hmtl_content
 from google.auth.transport.requests import Request
 from bot.helper.telegram_helper.button_build import ButtonMaker
-from bot import config_dict, DRIVES_NAMES, DRIVES_IDS, INDEX_URLS, GLOBAL_EXTENSION_FILTER
+from bot import config_dict, DRIVES_NAMES, DRIVES_IDS, INDEX_URLS, GLOBAL_EXTENSION_FILTER, GDRIVE_ID
 from bot.helper.ext_utils.telegraph_helper import telegraph
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval
 from bot.helper.ext_utils.fs_utils import get_mime_type
@@ -218,7 +218,7 @@ class GoogleDriveHelper:
                     LOGGER.info(f"Upload cancelled because: mimeType = {mime_type}")
                     self.__listener.onUploadError("ERROR: direct link not found!")
                     return
-                link = self.__upload_file(file_path, file_name, mime_type, DRIVES_IDS)
+                link = self.__upload_file(file_path, file_name, mime_type, GDRIVE_ID)
                 if self.__is_cancelled:
                     return
                 if link is None:
