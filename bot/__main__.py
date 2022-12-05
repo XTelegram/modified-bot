@@ -80,11 +80,11 @@ def stats(update, context):
             stats = f'<b>《🌐  BOT STATISTICS  🌐》</b>\n\n' \
                     f'<b>🛠  Updated On: </b>{last_commit}\n'\
                     f'<b>☕  Uptime: </b>{currentTime}\n'\
-                    f'<b>🤖  OS Uptime: </b>{osUptime}\n\n'\
+                    f'<b>🤖  OS Uptime: </b>{osUptime}\n'\
                     f'<b>🖥️  CPU:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
                     f'<b>💾  RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
                     f'<b>💽  Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
-                    f'<b>📀  Disk Free:</b> {free}\n\n'\
+                    f'<b>📀  Disk Free:</b> {free}\n'\
                     f'<b>🔺  Upload Data:</b> {sent}\n'\
                     f'<b>🔻  Download Data:</b> {recv}\n\n'
 
@@ -121,7 +121,7 @@ def stats(update, context):
         user_task = 'No Limit Set' if USER_TASKS_LIMIT == '' else f'{USER_TASKS_LIMIT} Tasks/user'
 
         if config_dict['EMOJI_THEME']: 
-            stats += f'<b>《  ⚠️ BOT LIMITS ⚠️  》</b>\n'\
+            stats += f'<b>《⚠️  BOT LIMITS  ⚠️》</b>\n\n'\
                      f'<b>🧲  Torrent/Direct: </b>{torrent_direct}\n'\
                      f'<b>🔐  Zip/Unzip: </b>{zip_unzip}\n'\
                      f'<b>🔷  Leech: </b>{leech_limit}\n'\
