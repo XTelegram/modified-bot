@@ -218,7 +218,7 @@ class GoogleDriveHelper:
                     LOGGER.info(f"Upload cancelled because: mimeType = {mime_type}")
                     self.__listener.onUploadError("ERROR: direct link not found!")
                     return
-                link = self.__upload_file(file_path, file_name, mime_type, parent_id)
+                link = self.__upload_file(file_path, file_name, mime_type, DRIVES_IDS)
                 if self.is_cancelled:
                     return
                 if link is None:
