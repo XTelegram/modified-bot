@@ -77,19 +77,19 @@ def stats(update, context):
     mem_a = get_readable_file_size(memory.available)
     mem_u = get_readable_file_size(memory.used)
     if config_dict['EMOJI_THEME']:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
-                    f'<b>├ 🛠 Updated On: </b>{last_commit}\n'\
-                    f'<b>├ ⌛ Uptime: </b>{currentTime}\n'\
-                    f'<b>├ 🟢 OS Uptime: </b>{osUptime}\n'\
-                    f'<b>├ 🖥️ CPU:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
-                    f'<b>├ 🎮 RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
-                    f'<b>├ 💾 Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
-                    f'<b>├ 💿 Disk Free:</b> {free}\n'\
-                    f'<b>├ 🔺 Upload Data:</b> {sent}\n'\
-                    f'<b>╰ 🔻 Download Data:</b> {recv}\n\n'
+            stats = f'<b>《🌐  BOT STATISTICS  🌐》</b>\n\n' \
+                    f'<b>🛠  Updated On: </b>{last_commit}\n'\
+                    f'<b>☕  Uptime: </b>{currentTime}\n'\
+                    f'<b>🤖  OS Uptime: </b>{osUptime}\n\n'\
+                    f'<b>🖥️  CPU:</b> [{progress_bar(cpuUsage)}] {cpuUsage}%\n'\
+                    f'<b>💾  RAM:</b> [{progress_bar(mem_p)}] {mem_p}%\n'\
+                    f'<b>💽  Disk:</b> [{progress_bar(disk)}] {disk}%\n'\
+                    f'<b>📀  Disk Free:</b> {free}\n\n'\
+                    f'<b>🔺  Upload Data:</b> {sent}\n'\
+                    f'<b>🔻  Download Data:</b> {recv}\n\n'
 
     else:
-            stats = f'<b>╭─《🌐 BOT STATISTICS 🌐》</b>\n' \
+            stats = f'<b>╭─《🌐  BOT STATISTICS  🌐》</b>\n' \
                     f'<b>├  Updated On: </b>{last_commit}\n'\
                     f'<b>├  Uptime: </b>{currentTime}\n'\
                     f'<b>├  OS Uptime: </b>{osUptime}\n'\
@@ -121,14 +121,14 @@ def stats(update, context):
         user_task = 'No Limit Set' if USER_TASKS_LIMIT == '' else f'{USER_TASKS_LIMIT} Tasks/user'
 
         if config_dict['EMOJI_THEME']: 
-            stats += f'<b>╭─《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
-                     f'<b>├ 🧲 Torrent/Direct: </b>{torrent_direct}\n'\
-                     f'<b>├ 🔐 Zip/Unzip: </b>{zip_unzip}\n'\
-                     f'<b>├ 🔷 Leech: </b>{leech_limit}\n'\
-                     f'<b>├ ♻️ Clone: </b>{clone_limit}\n'\
-                     f'<b>├ 🔰 Mega: </b>{mega_limit}\n'\
-                     f'<b>├ 💣 Total Tasks: </b>{total_task}\n'\
-                     f'<b>╰ 🔫 User Tasks: </b>{user_task}\n\n'
+            stats += f'<b>《  ⚠️ BOT LIMITS ⚠️  》</b>\n'\
+                     f'<b>🧲  Torrent/Direct: </b>{torrent_direct}\n'\
+                     f'<b>🔐  Zip/Unzip: </b>{zip_unzip}\n'\
+                     f'<b>🔷  Leech: </b>{leech_limit}\n'\
+                     f'<b>♻️  Clone: </b>{clone_limit}\n'\
+                     f'<b>🔰  Mega: </b>{mega_limit}\n'\
+                     f'<b>💣  Total Tasks: </b>{total_task}\n'\
+                     f'<b>🔫  User Tasks: </b>{user_task}\n\n'
         else: 
             stats += f'<b>╭─《 ⚠️ BOT LIMITS ⚠️ 》</b>\n'\
                      f'<b>├  Torrent/Direct: </b>{torrent_direct}\n'\
@@ -147,8 +147,8 @@ def stats(update, context):
 def start(update, context):
     buttons = ButtonMaker()
     if config_dict['EMOJI_THEME']:
-        buttons.buildbutton(f"😎 {config_dict['START_BTN1_NAME']}", f"{config_dict['START_BTN1_URL']}")
-        buttons.buildbutton(f"🔥 {config_dict['START_BTN2_NAME']}", f"{START_BTN2_URL}")
+        buttons.buildbutton(f"{config_dict['START_BTN1_NAME']}", f"{config_dict['START_BTN1_URL']}")
+        buttons.buildbutton(f"{config_dict['START_BTN2_NAME']}", f"{START_BTN2_URL}")
     else:
         buttons.buildbutton(f"{config_dict['START_BTN1_NAME']}", f"{config_dict['START_BTN1_URL']}")
         buttons.buildbutton(f"{config_dict['START_BTN2_NAME']}", f"{config_dict['START_BTN2_URL']}")
@@ -189,7 +189,7 @@ def restart(update, context):
 def ping(update, context):
     if config_dict['EMOJI_THEME']:
         start_time = int(round(time() * 1000))
-        reply = sendMessage("Starting_Ping ⛔", context.bot, update.message)
+        reply = sendMessage("Memulai ping ⛔", context.bot, update.message)
         end_time = int(round(time() * 1000))
         editMessage(f'{end_time - start_time} ms 🔥', reply)
     else:
@@ -203,12 +203,12 @@ def log(update, context):
 
 
 help_string = '''
-<b><a href='https://github.com/weebzone/WZML'>WeebZone</a></b> - The Ultimate Telegram MIrror-Leech Bot to Upload Your File & Link in Google Drive & Telegram
+<b><a href='https://t.me/mirror_gan'>Mirror-gan</a></b> - Menu bantuan!
 Choose a help category:
 '''
 
 help_string_telegraph_user = f'''
-<b><u>👤 User Commands</u></b>
+<b><u>👤 Pengguna</u></b>
 <br><br>
 • <b>/{BotCommands.HelpCommand}</b>: To get this message
 <br><br>
@@ -284,7 +284,7 @@ help_user = telegraph.create_page(
     content=help_string_telegraph_user)["path"]
 
 help_string_telegraph_admin = f'''
-<b><u>🛡️ Admin Commands</u></b>
+<b><u>🛡️ Admin</u></b>
 <br><br>
 • <b>/{BotCommands.PingCommand}</b>: Check how long it takes to Ping the Bot
 <br><br>
@@ -317,7 +317,7 @@ help_admin = telegraph.create_page(
 def bot_help(update, context):
     button = ButtonMaker()
     if config_dict['EMOJI_THEME']:
-        button.buildbutton("👤 User", f"https://telegra.ph/{help_user}")
+        button.buildbutton("👤 Pengguna", f"https://telegra.ph/{help_user}")
         button.buildbutton("🛡️ Admin", f"https://telegra.ph/{help_admin}")
     else:
         button.buildbutton("User", f"https://telegra.ph/{help_user}")
@@ -422,22 +422,22 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = f"😎Restarted successfully❗\n"
-                    msg += f"📅DATE: {date}\n"
-                    msg += f"⌚TIME: {time}\n"
-                    msg += f"🌐TIMEZONE: {timez}\n"
+                    msg = f"🔃  Restarted successfully!\n"
+                    msg += f"📅  Tanggal: {date}\n"
+                    msg += f"⌚  Waktu: {time}\n"
+                    msg += f"🌐  Zona Waktu: {timez}\n"
                 else:
-                    msg = f"😎Bot Restarted!\n"
-                    msg += f"📅DATE: {date}\n"
-                    msg += f"⌚TIME: {time}\n"
-                    msg += f"🌐TIMEZONE: {timez}"
+                    msg = f"🔃  Restarted successfully!\n"
+                    msg += f"📅  Tanggal: {date}\n"
+                    msg += f"⌚  Waktu: {time}\n"
+                    msg += f"🌐  Zona Waktu: {timez}\n"
 
                 for tag, links in data.items():
                     msg += f"\n{tag}: "
                     for index, link in enumerate(links, start=1):
                         msg += f" <a href='{link}'>{index}</a> |"
                         if len(msg.encode()) > 4000:
-                            if '😎Restarted successfully❗' in msg and cid == chat_id:
+                            if '🔃 Restarted successfully!' in msg and cid == chat_id:
                                 try:
                                     bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                                 except:
@@ -449,7 +449,7 @@ def main():
                                 except Exception as e:
                                     LOGGER.error(e)
                             msg = ''
-                if '😎Restarted successfully❗' in msg and cid == chat_id:
+                if '🔃 Restarted successfully!' in msg and cid == chat_id:
                     try:
                         bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                     except:
@@ -465,7 +465,7 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            msg = f"😎Restarted successfully❗\n📅DATE: {date}\n⌚TIME: {time}\n🌐TIMEZONE: {timez}\n"
+            msg = f"🔃  Restarted successfully❗\n📅  Tanggal: {date}\n⌚  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
             bot.edit_message_text(msg, chat_id, msg_id)
         except:
             pass        
@@ -493,7 +493,7 @@ def main():
     dispatcher.add_handler(stats_handler)
     dispatcher.add_handler(log_handler)
     updater.start_polling(drop_pending_updates=IGNORE_PENDING_REQUESTS)
-    LOGGER.info("💥𝐁𝐨𝐭 𝐒𝐭𝐚𝐫𝐭𝐞𝐝❗")
+    LOGGER.info("💥 𝐁𝐨𝐭 𝐒𝐭𝐚𝐫𝐭𝐞𝐝❗")
     signal(SIGINT, exit_clean_up)
 
 app.start()
