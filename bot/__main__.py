@@ -204,7 +204,8 @@ def log(update, context):
 
 help_string = '''
 <b><a href='https://t.me/mirror_gan'>Mirror-gan</a></b> - Menu bantuan!
-Choose a help category:
+
+Pilih Kategori:
 '''
 
 help_string_telegraph_user = f'''
@@ -422,12 +423,12 @@ def main():
                 if ospath.isfile(".restartmsg"):
                     with open(".restartmsg") as f:
                         chat_id, msg_id = map(int, f)
-                    msg = f"🔃  Restarted successfully!\n"
+                    msg = f"♻️  Restarted successfully!\n"
                     msg += f"📅  Tanggal: {date}\n"
                     msg += f"⌚  Waktu: {time}\n"
                     msg += f"🌐  Zona Waktu: {timez}\n"
                 else:
-                    msg = f"🔃  Restarted successfully!\n"
+                    msg = f"♻️  Restarted successfully!\n"
                     msg += f"📅  Tanggal: {date}\n"
                     msg += f"⌚  Waktu: {time}\n"
                     msg += f"🌐  Zona Waktu: {timez}\n"
@@ -437,7 +438,7 @@ def main():
                     for index, link in enumerate(links, start=1):
                         msg += f" <a href='{link}'>{index}</a> |"
                         if len(msg.encode()) > 4000:
-                            if '🔃 Restarted successfully!' in msg and cid == chat_id:
+                            if '♻️Restarted  successfully!' in msg and cid == chat_id:
                                 try:
                                     bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                                 except:
@@ -449,7 +450,7 @@ def main():
                                 except Exception as e:
                                     LOGGER.error(e)
                             msg = ''
-                if '🔃 Restarted successfully!' in msg and cid == chat_id:
+                if '♻️ Restarted successfully!' in msg and cid == chat_id:
                     try:
                         bot.editMessageText(msg, chat_id, msg_id, parse_mode='HTML', disable_web_page_preview=True)
                     except:
@@ -465,7 +466,7 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            msg = f"🔃  Restarted successfully❗\n📅  Tanggal: {date}\n⌚  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
+            msg = f"♻️  Restarted successfully❗\n📅  Tanggal: {date}\n⌚  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
             bot.edit_message_text(msg, chat_id, msg_id)
         except:
             pass        
