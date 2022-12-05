@@ -292,8 +292,8 @@ def get_readable_message():
                 elif 'M' in spd:
                     up_speed += float(spd.split('M')[0]) * 1048576
         if config_dict['EMOJI_THEME']:
-            bmsg += f"<b>🤖  Tugas:</b> {tasks}\n"
-            bmsg = f"<b>🖥  CPU:</b> {cpu_percent()}%\n<b>💿  FREE:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
+            bmsg = f"<b>🤖  Tugas:</b> {tasks}\n"
+            bmsg += f"<b>🖥  CPU:</b> {cpu_percent()}%\n<b>💿  FREE:</b> {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
             bmsg += f"\n<b>💾  RAM:</b> {virtual_memory().percent}%\n<b>☕  UPTIME:</b> {get_readable_time(time() - botStartTime)}"
             bmsg += f"\n\n<b>🔺  UL:</b> {get_readable_file_size(up_speed)}/detik\n<b>🔻  DL:</b> {get_readable_file_size(dl_speed)}/detik"
         else:
