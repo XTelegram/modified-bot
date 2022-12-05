@@ -53,12 +53,15 @@ class AriaDownloadStatus:
     def name(self):
         return self.__download.name
 
-
     def size(self):
         return self.__download.total_length_string()
 
     def eta(self):
-        return self.__download.eta_string()
+        seconds = self.__download.eta
+        if seconds.total_seconds() >= 86400000000000:
+            return '-'
+        else:
+            return f'{get_readable_time(seconds.total_seconds())}'
 
     def status(self):
         self.__update()
