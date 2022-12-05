@@ -262,6 +262,8 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
             msg = "Qb commands for torrents only. if you are trying to dowload torrent then report."
             return sendMessage(msg, bot, message)
 
+    if check_ != None:
+        deleteMessage(bot, check_); check_ = None
     listener = MirrorLeechListener(bot, message, isZip, extract, isQbit, isLeech, pswd, tag, select, seed)
 
     if is_gdrive_link(link):
