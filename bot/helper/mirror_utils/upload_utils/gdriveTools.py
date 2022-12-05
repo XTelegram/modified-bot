@@ -219,7 +219,7 @@ class GoogleDriveHelper:
                     self.__listener.onUploadError("ERROR: direct link not found!")
                     return
                 link = self.__upload_file(file_path, file_name, mime_type, DRIVES_IDS)
-                if self.is_cancelled:
+                if self.__is_cancelled:
                     return
                 if link is None:
                     raise Exception('Upload has been manually cancelled')
