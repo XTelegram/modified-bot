@@ -275,7 +275,7 @@ class MirrorLeechListener:
         NAME_FONT = config_dict['NAME_FONT']
         if config_dict['EMOJI_THEME']:
             slmsg = f"🔤  Nama: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
-            slmsg += f"📦  Ukuran: {size}\n"
+            slmsg += f"\n📦  Ukuran: {size}\n"
             slmsg += f"👥 diTambahkan Oleh: {self.tag}\n#️⃣ UID:. <code>{self.user_id}</code>\n\n"
         else:
             slmsg = f"Name: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
@@ -372,7 +372,7 @@ class MirrorLeechListener:
                 reply_to.delete()
 
         if config_dict['EMOJI_THEME']:
-            msg = f"<b>🔤 ️ Nama: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n<b>📦  Ukuran: </b>{size}"
+            msg = f"<b>🔤 ️ Nama: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n\n<b>📦  Ukuran: </b>{size}"
         else:
             msg = f"<b>╭ Name: </b><{config_dict['NAME_FONT']}>{file_}</{config_dict['NAME_FONT']}>\n<b>├ Size: </b>{size}"
 
@@ -433,7 +433,7 @@ class MirrorLeechListener:
                 else:
                     msg += f'\n<b>├ Corrupted Files: </b>{typ}'
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
                 msg += f'\n<b>👤  diUpload Oleh: </b>{self.tag}\n\n'
             else: 
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
@@ -501,7 +501,7 @@ class MirrorLeechListener:
                     msg += f'\n<b>├ SubFolders: </b>{folders}'
                     msg += f'\n<b>├ Files: </b>{files}'
             if config_dict['EMOJI_THEME']:
-                msg += f'\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
+                msg += f'\n\n<b>🕘  Selesai Dalam:</b> {get_readable_time(time() - self.message.date.timestamp())}'
                 msg += f'\n<b>👤  diMirror Oleh: </b>{self.tag}\n\n'
             else:
                 msg += f'\n<b>├ It Tooks:</b> {get_readable_time(time() - self.message.date.timestamp())}'
