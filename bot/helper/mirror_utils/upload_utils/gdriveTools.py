@@ -602,7 +602,7 @@ class GoogleDriveHelper:
                     if mime_type == "application/vnd.google-apps.folder":
                         furl = f"https://drive.google.com/drive/folders/{file.get('id')}"
                         msg += f"📁 <code>{file.get('name')}<br>(folder)</code><br>"
-                        msg += f"<b><a href={furl}>Drive Link</a></b>"
+                        msg += f"<b><a href={furl}>☁️ G-Drive Link</a></b>"
                         if index_url:
                             if isRecur:
                                 url_path = "/".join([rquote(n, safe='') for n in self.__get_recursive_list(file, dir_id)])
@@ -652,7 +652,7 @@ class GoogleDriveHelper:
             if len(path) > 1:
                 telegraph.edit_telegraph(path, telegraph_content)
     
-            msg = f"<b>📝  Berhasil Menemukan: {contents_count}\n🔤  Hasil Pencarian Dari: <i>{fileName}</i></b>"
+            msg = f"<b>📝  Berhasil Menemukan:</b> <i>{contents_count}</i>\n<b>🔤  Hasil Pencarian Dari:</b> <i>{fileName}</i>"
             buttons = ButtonMaker()
             buttons.buildbutton("🔎 Lihat", f"https://telegra.ph/{path[0]}")
     
@@ -728,7 +728,7 @@ class GoogleDriveHelper:
                     break
             if contents_count == 0:
                 return "", ""
-            cap = f"<b>📝  Berhasil Menemukan: {contents_count}\n🔤  Hasil Pencarian Dari: <i>{fileName}</i></b>"
+            cap = f"<b>📝  Berhasil Menemukan:</b> <i>{contents_count}</i>\n<b>🔤  Hasil Pencarian Dari:</b> <i>{fileName}</i>"
             f_name = f'{fileName}_{time()}.html'
             with open(f_name, 'w', encoding='utf-8') as f:
                 f.write(hmtl_content.replace('{fileName}', fileName).replace('{msg}', msg))
