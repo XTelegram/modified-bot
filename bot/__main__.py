@@ -47,7 +47,7 @@ now=datetime.now(timezone(f'{timez}'))
 def stats(update, context):
     if ospath.exists('.git'):
         if config_dict['EMOJI_THEME']:
-            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├</b> 🛠<b>From:</b> %cr'"], shell=True).decode()
+            last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b></b> 🛠<b>  From:</b> %cr'"], shell=True).decode()
             botVersion = check_output(["git log -1 --date=format:v%y.%m%d.%H%M --pretty=format:%cd"], shell=True).decode()
         else:
             last_commit = check_output(["git log -1 --date=short --pretty=format:'%cd \n<b>├  From:</b> %cr'"], shell=True).decode()
