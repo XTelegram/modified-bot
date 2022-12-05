@@ -198,7 +198,7 @@ def get_readable_message():
                     msg += f"\n<b>🚀  Speed:</b> {download.speed()}"
                     msg += f"\n<b>⏳  Estimasi:</b> {download.eta()}"
                     msg += f"\n<b>🕘  Waktu: </b>{get_readable_time(time() - download.message.date.timestamp())}"
-                    msg += f"\n<b>⛓️ Engine :</b> {download.eng()}"
+                    msg += f"\n<b>⚙️  Engine :</b> {download.eng()}"
 
                 else:
                     msg += f"\n<b>├</b>{get_progress_bar_string(download)} {download.progress()}"
