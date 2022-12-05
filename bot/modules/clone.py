@@ -170,7 +170,7 @@ def _clone(message, bot):
             if config_dict['TELEGRAPH_STYLE']:
                 smsg, button = gd.drive_list(name, True, True)
                 if smsg:
-                    msg3 = "Someone already mirrored it for you !\nHere you go:"
+                    msg3 = "⚠️ File/Folder sudah ada 🤗"
                     return sendMarkup(msg3, bot, message, button)
             else:
                 cap, f_name = gd.drive_list(name, True, True)
@@ -195,7 +195,7 @@ def _clone(message, bot):
             sleep(4)
             Thread(target=_clone, args=(nextmsg, bot)).start()
         if files <= 20:
-            msg = sendMessage(f"Cloning: <code>{link}</code>", bot, message)
+            msg = sendMessage(f"♻️ Cloning: <code>{link}</code>", bot, message)
             result, button = gd.clone(link)
             deleteMessage(bot, msg)
             if config_dict['BOT_PM'] and config_dict['FORCE_BOT_PM']:
