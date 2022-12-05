@@ -215,7 +215,7 @@ def _clone(message, bot):
                         sendMarkup(msg + botpm, bot, message, buttons.build_menu(2))
                 else:
                     if config_dict['EMOJI_THEME']:
-                        cc = f'\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
+                        cc = f'\n\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
                     else:
                         cc = f'\n<b>╰ #Clone_By: </b>{tag}\n\n'
                     if PICS:
@@ -259,7 +259,7 @@ def _clone(message, bot):
                                 sendMarkup(msg + botpm, bot, message, buttons.build_menu(2))
                         else:
                             if config_dict['EMOJI_THEME']:
-                                cc = f'\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
+                                cc = f'\n\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
                             else:
                                 cc = f'\n<b>╰ #Clone_By: </b>{tag}\n\n'
                             if PICS:
@@ -309,7 +309,7 @@ def _clone(message, bot):
                         pass  
 
         if config_dict['EMOJI_THEME']:
-            cc = f'\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
+            cc = f'\n\n<b>👤  diSalin Oleh: </b>{tag}\n\n'
         else:
             cc = f'\n<b>╰ #Clone_By: </b>{tag}\n\n'
         if button in ["cancelled", ""]:
