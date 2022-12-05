@@ -216,6 +216,9 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
         return reply_message
 
     LOGGER.info(link)
+    if multi == 0:
+        check_ = sendMessage(f"<b><i>🔗 Memeriksa link download...</i></b>", bot, message)
+    else: check_ = None
 
     if not is_mega_link(link) and not isQbit and not is_magnet(link) \
         and not is_gdrive_link(link) and not link.endswith('.torrent'):
