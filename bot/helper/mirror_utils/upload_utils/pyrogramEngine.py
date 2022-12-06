@@ -87,7 +87,7 @@ class TgUploader:
 
         #MysteryStyle
         if file_.startswith('www'):
-            file_ = ' '.join(file_.split()[1:])
+            file_ = '[@mirror_gan]'.join(file_.split()[1:])
         if REMNAME:
             if not REMNAME.startswith('|'):
                 REMNAME = f"|{REMNAME}"
