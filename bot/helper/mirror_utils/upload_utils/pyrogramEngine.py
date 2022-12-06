@@ -75,6 +75,18 @@ class TgUploader:
         self.__listener.onUploadComplete(None, size, self.__msgs_dict, self.__total_files, self.__corrupted, self.name)
 
     def __upload_file(self, up_path, file_, dirpath):
+        if CUSTOM_FILENAME is not None:
+            cap_mono = f"{CUSTOM_FILENAME} {file_}"
+            file_ = f"{CUSTOM_FILENAME} {file_}"
+            new_path = ospath.join(dirpath, file_)
+            osrename(up_path, new_path)
+            up_path = new_path
+        else:
+            cap_mono = f"{file_}"
+        notMedia = False
+        thumb = self.__thumb
+        self.__is_corrupted = False
+
         fsize = ospath.getsize(up_path)
         user_id_ = self.__listener.message.from_user.id
 
@@ -87,7 +99,7 @@ class TgUploader:
 
         #MysteryStyle
         if file_.startswith('www'):
-            file_ = '[@mirror_gan]'.join(file_.split()[1:])
+            file_ = ' '.join(file_.split()[1:])
         if REMNAME:
             if not REMNAME.startswith('|'):
                 REMNAME = f"|{REMNAME}"
@@ -105,13 +117,13 @@ class TgUploader:
             LOGGER.info("Remname : "+file_)
         if PREFIX:
             if not file_.startswith(PREFIX):
-                file_ = f"[@mirror_gan] {PREFIX}{file_}"
+                file_ = f"{PREFIX}{file_}"
         if SUFFIX:
             sufLen = len(SUFFIX)
             fileDict = file_.split('.')
             _extIn = 1 + len(fileDict[-1])
             _extOutName = '.'.join(fileDict[:-1]).replace('.', ' ').replace('-', ' ')
-            _newExtFileName = f"[@mirror_gan] {_extOutName}{SUFFIX}.{fileDict[-1]}"
+            _newExtFileName = f"{_extOutName}{SUFFIX}.{fileDict[-1]}"
             if len(_extOutName) > (64 - (sufLen + _extIn)):
                 _newExtFileName = (
                     _extOutName[: 64 - (sufLen + _extIn)]
