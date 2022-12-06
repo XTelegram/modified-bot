@@ -195,7 +195,6 @@ def zippy_share(url: str) -> str:
     dl_url = f"{base_url}/{uri1}/{int(mtk)}/{uri2}"
     return dl_url
 
-
 def yandex_disk(url: str) -> str:
     """ Yandex.Disk direct link generator
     Based on https://github.com/wldhx/yadisk-direct """
@@ -255,7 +254,6 @@ def mediafire(url: str) -> str:
     page = BeautifulSoup(rget(link).content, 'lxml')
     info = page.find('a', {'aria-label': 'Download file'})
     return info.get('href')
-
 
 def osdn(url: str) -> str:
     """ OSDN direct link generator """
@@ -385,13 +383,11 @@ def racaty(url: str) -> str:
     return dl_url
 
 def fichier(link: str) -> str:
-    """ 1Fichier direct link generator
-    Based on https://github.com/Maujar
-    """
+    link = link.split('&af=')[0]
     regex = r"^([http:\/\/|https:\/\/]+)?.*1fichier\.com\/\?.+"
     gan = re_match(regex, link)
     if not gan:
-      raise DirectDownloadLinkException("ERROR: The link you entered is wrong!")
+      raise DirectDownloadLinkException("ERROR: Link yang kamu masukkan salah!")
     if "::" in link:
       pswd = link.split("::")[-1]
       url = link.split("::")[-2]
@@ -405,14 +401,14 @@ def fichier(link: str) -> str:
         pw = {"pass": pswd}
         req = rpost(url, data=pw)
     except:
-      raise DirectDownloadLinkException("ERROR: Unable to reach 1fichier server!")
+      raise DirectDownloadLinkException("ERROR: Tidak dapat menjangkau server 1fichier!")
     if req.status_code == 404:
-      raise DirectDownloadLinkException("ERROR: File not found/The link you entered is wrong!")
+      raise DirectDownloadLinkException("ERROR: File tidak ditemukan atau link yang Anda masukkan salah!")
     soup = BeautifulSoup(req.content, 'lxml')
     if soup.find("a", {"class": "ok btn-general btn-orange"}) is not None:
         dl_url = soup.find("a", {"class": "ok btn-general btn-orange"})["href"]
         if dl_url is None:
-          raise DirectDownloadLinkException("ERROR: Unable to generate Direct Link 1fichier!")
+          raise DirectDownloadLinkException("ERROR: Generate link 1fichier gagal!")
         else:
           return dl_url
     elif len(soup.find_all("div", {"class": "ct_warn"})) == 3:
@@ -420,29 +416,29 @@ def fichier(link: str) -> str:
         if "you must wait" in str(str_2).lower():
             numbers = [int(word) for word in str(str_2).split() if word.isdigit()]
             if not numbers:
-                raise DirectDownloadLinkException("ERROR: 1fichier is on a limit. Please wait a few minutes/hour.")
+                raise DirectDownloadLinkException("ERROR: 1fichier limit. Silahkan tunggu beberapa jam/menit.")
             else:
-                raise DirectDownloadLinkException(f"ERROR: 1fichier is on a limit. Please wait {numbers[0]} minute.")
+                raise DirectDownloadLinkException(f"ERROR: 1fichier limit. Silahkan tunggu {numbers[0]} menit lagi!")
         elif "protect access" in str(str_2).lower():
-          raise DirectDownloadLinkException(f"ERROR: This link requires a password!\n\n<b>This link requires a password!</b>\n- Insert sign <b>::</b> after the link and write the password after the sign.\n\n<b>Example:</b>\n<code>/{BotCommands.MirrorCommand} https://1fichier.com/?smmtd8twfpm66awbqz04::love you</code>\n\n* No spaces between the signs <b>::</b>\n* For the password, you can use a space!")
+          raise DirectDownloadLinkException(f"ERROR: Link diproteksi!\n\n<b>Link ini membutuhkan password!</b>\n- Ketik <b>::</b> setelah link dan masukan password nya.\n\n<b>Contoh:</b>\n<code>/{BotCommands.MirrorCommand} https://1fichier.com/?blablabla::mirror-gan</code>\n\n* Tidak ada spasi diantara simbol <b>::</b>\n* Untuk password nya, kamu bisa menambahkan spasi!")
         else:
             print(str_2)
-            raise DirectDownloadLinkException("ERROR: Failed to generate Direct Link from 1fichier!")
+            raise DirectDownloadLinkException("ERROR: Generate link 1fichier Gagal!")
     elif len(soup.find_all("div", {"class": "ct_warn"})) == 4:
         str_1 = soup.find_all("div", {"class": "ct_warn"})[-2]
         str_3 = soup.find_all("div", {"class": "ct_warn"})[-1]
         if "you must wait" in str(str_1).lower():
             numbers = [int(word) for word in str(str_1).split() if word.isdigit()]
             if not numbers:
-                raise DirectDownloadLinkException("ERROR: 1fichier is on a limit. Please wait a few minutes/hour.")
+                raise DirectDownloadLinkException("ERROR: 1fichier limit. Silahkan tunggu beberapa jam/menit.")
             else:
-                raise DirectDownloadLinkException(f"ERROR: 1fichier is on a limit. Please wait {numbers[0]} minute.")
+                raise DirectDownloadLinkException(f"ERROR: 1fichier limit. Silahkan tunggu {numbers[0]} menit lagi!")
         elif "bad password" in str(str_3).lower():
-          raise DirectDownloadLinkException("ERROR: The password you entered is wrong!")
+          raise DirectDownloadLinkException("ERROR: Password yang kamu masukkan salah!")
         else:
-            raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+            raise DirectDownloadLinkException("ERROR: Generate link 1fichier Gagal!")
     else:
-        raise DirectDownloadLinkException("ERROR: Error trying to generate Direct Link from 1fichier!")
+        raise DirectDownloadLinkException("ERROR: Generate link 1fichier Gagal!")
 
 def solidfiles(url: str) -> str:
     """ Solidfiles direct link generator
