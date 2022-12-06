@@ -46,7 +46,7 @@ def _clone(message, bot):
         pmwarn = ''
     if 'mirror_logs' in user_data and message.chat.type != 'private':
         if config_dict['EMOJI_THEME']:
-            logwarn = f"<b>📝 LOG telah disimpan di <a href='https://t.me/mirror_gan_log'>Mirror-gan (LOG)</a></b>\n"
+            logwarn = f"<b>📝  LOG telah disimpan di <a href='https://t.me/mirror_gan_log'>Mirror-gan (LOG)</a></b>\n"
         else:
             logwarn = f"<b>I have sent files in Mirror Log Channel. Join <a href=\"{config_dict['MIRROR_LOG_URL']}\">Mirror Log channel</a> </b>\n"
     elif message.chat.type == 'private':
