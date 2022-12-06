@@ -434,9 +434,9 @@ def main():
                     msg += f"🌐  Zona Waktu: {timez}\n"
 
                 for tag, links in data.items():
-                    msg += f"\n{tag} <b>Proses mirror kamu telah dihentikan!</b>"
+                    msg += f"\n{tag} <b>Proses mirror kamu telah dihentikan!\n</b>"
                     for index, link in enumerate(links, start=1):
-                        msg += f" <a href='{link}'>{index}</a> |"
+                        msg += f" <b><a href=Proses ke '{link}'>{index}</a></b> |"
                         if len(msg.encode()) > 4000:
                             if '♻️Restarted  successfully!' in msg and cid == chat_id:
                                 try:
