@@ -46,7 +46,7 @@ def _list_drive(bot, key, bmsg, item_type):
         if button:
             editMessage(msg, bmsg, button)
         else:
-            editMessage(f'<b>📝 Tidak menemukan hasil dari:</b> <code><i>{key}</i></code>'', bmsg)
+            editMessage(f'<b>📝 Tidak menemukan hasil dari:</b> <code><i>{key}</i></code>', bmsg)
 
     else:
 
@@ -57,7 +57,7 @@ def _list_drive(bot, key, bmsg, item_type):
             deleteMessage(bot, bmsg)
             sendFile(bot, bmsg.reply_to_message, f_name, cap)
         else:
-            editMessage(f'<b>📝 Tidak menemukan hasil dari:</b> <code><i>{key}</i></code>'', bmsg)
+            editMessage(f'<b>📝 Tidak menemukan hasil dari:</b> <code><i>{key}</i></code>', bmsg)
 
 list_handler = CommandHandler(BotCommands.ListCommand, list_buttons,
                               filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
