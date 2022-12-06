@@ -434,7 +434,7 @@ def main():
                     msg += f"🌐  Zona Waktu: {timez}\n"
 
                 for tag, links in data.items():
-                    msg += f"\n{tag}: "
+                    msg += f"\n<b>Daftar prodes mirror yang dihentikan:</b>\n{tag}: "
                     for index, link in enumerate(links, start=1):
                         msg += f" <a href='{link}'>{index}</a> |"
                         if len(msg.encode()) > 4000:
@@ -466,7 +466,7 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            msg = f"♻️  Restarted successfully❗\n📅  Tanggal: {date}\n⌚  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
+            msg = f"♻️  Restarted successfully❗\n📅  Tanggal: {date}\n🕘  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
             bot.edit_message_text(msg, chat_id, msg_id)
         except:
             pass        
