@@ -18,7 +18,7 @@ def list_buttons(update, context):
     buttons.sbutton("📚 Semua", f"types {user_id} both")
     buttons.sbutton("❌ Batal", f"types {user_id} cancel")
     button = buttons.build_menu(2)
-    sendMarkup('🔎 <b>Pilih metode pencarian!</b>', context.bot, update.message, button)
+    sendMarkup('🔎 <b>Pilih metode pencarian!</b>\n\n⚠️ <i>NOTES: Jika saat proses pencarian lama, silahkan ulangi!</i>', context.bot, update.message, button)
 
 def select_type(update, context):
     query = update.callback_query
