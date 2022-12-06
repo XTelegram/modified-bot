@@ -246,19 +246,14 @@ def uptobox(url: str) -> str:
     return dl_url
 
 def mediafire(url: str) -> str:
+    """ MediaFire direct link generator """
     try:
-        link = re.findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
-        link = link.split('?dkey=')[0]
+        link = re_findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
     except IndexError:
         raise DirectDownloadLinkException("No MediaFire links found\n")
-    try:
-        page = BeautifulSoup(requests.get(link).content, 'lxml')
-        info = page.find('a', {'aria-label': 'Download file'})
-        dl_url = info.get('href')
-        return dl_url
-    except Exception as e:
-        LOGGER.error(e)
-        raise DirectDownloadLinkException("ERROR: Generate link Mediafire gagal!")
+    page = BeautifulSoup(rget(link).content, 'lxml')
+    info = page.find('a', {'aria-label': 'Download file'})
+    return info.get('href')
 
 def osdn(url: str) -> str:
     """ OSDN direct link generator """
