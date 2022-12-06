@@ -294,7 +294,6 @@ class TgUploader:
                         else: usingclient = self.__app
                         self.__sent_msg = usingclient.send_document(chat_id=int(leechchat),
                                                                 document=up_path,
-                                                                thumb=thumb,
                                                                 caption=cap_mono,
                                                                 disable_notification=True,
                                                                 progress=self.__upload_progress)
@@ -311,7 +310,6 @@ class TgUploader:
                 else:
                     self.__sent_msg = self.__sent_msg.reply_document(document=up_path,
                                                                      quote=True,
-                                                                     thumb=thumb,
                                                                      caption=cap_mono,
                                                                      disable_notification=True,
                                                                      progress=self.__upload_progress)
