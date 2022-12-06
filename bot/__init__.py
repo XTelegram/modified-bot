@@ -385,6 +385,9 @@ IGNORE_PENDING_REQUESTS = IGNORE_PENDING_REQUESTS.lower() == 'true'
 AS_DOCUMENT = environ.get('AS_DOCUMENT', '')
 AS_DOCUMENT = AS_DOCUMENT.lower() == 'true'
 
+CUSTOM_FILENAME = environ.get('CUSTOM_FILENAME', "[@mirror_gan]")
+CUSTOM_FILENAME = CUSTOM_FILENAME.lower() == 'true'
+
 EQUAL_SPLITS = environ.get('EQUAL_SPLITS', '')
 EQUAL_SPLITS = EQUAL_SPLITS.lower() == 'true'
 
