@@ -17,7 +17,7 @@ def __onDownloadStarted(api, gid):
         if dl := getDownloadByGid(gid):
             listener = dl.listener()
             if listener.select:
-                metamsg = "Downloading Metadata, wait then you can select files. Use torrent file to avoid this wait."
+                metamsg = "⏳ Sedang mengunduh METADATA...."
                 meta = sendMessage(metamsg, listener.bot, listener.message)
                 while True:
                     if download.is_removed or download.followed_by_ids:
@@ -59,7 +59,7 @@ def __onDownloadStarted(api, gid):
                         if smsg:
                             listener.onDownloadError('⚠️ File/Folder sudah ada 🤗\n\n')
                             api.remove([download], force=True, files=True)
-                            return sendMarkup("Cek Disini", listener.bot, listener.message, button)
+                            return sendMarkup("Cek Disini 👇", listener.bot, listener.message, button)
                     else:
                         cap, f_name = GoogleDriveHelper().drive_list(sname, True)
                         if cap:
@@ -136,7 +136,7 @@ def __onDownloadComplete(api, gid):
             if config_dict['BASE_URL'] and listener.select:
                 api.client.force_pause(new_gid)
                 SBUTTONS = bt_selection_buttons(new_gid)
-                msg = "Your download paused. Choose files then press Done Selecting button to start downloading."
+                msg = "📝 Proses mirror kamu dihentikan sementara. Pilih files dan tekan Done untuk melanjutkan."
                 sendMarkup(msg, listener.bot, listener.message, SBUTTONS)
     elif download.is_torrent:
         if dl := getDownloadByGid(gid):
