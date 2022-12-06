@@ -276,7 +276,7 @@ class MirrorLeechListener:
         if config_dict['EMOJI_THEME']:
             slmsg = f"🔤  Nama: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
             slmsg += f"📦  Ukuran: {size}\n"
-            slmsg += f"👥 diTambahkan Oleh: {self.tag}\n#️⃣ UID:. <code>{self.user_id}</code>\n\n"
+            slmsg += f"👤  diTambahkan Oleh: {self.tag}\n#️⃣  UID:. <code>{self.user_id}</code>\n\n"
         else:
             slmsg = f"Name: <{NAME_FONT}>{file_}</{NAME_FONT}>\n\n"
             slmsg += f"Size: {size}\n"

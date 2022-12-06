@@ -282,7 +282,7 @@ def _clone(message, bot):
         if config_dict['EMOJI_THEME']:
             slmsg = f"🔤️  Nama: <{config_dict['NAME_FONT']}>{escape(name)}</{config_dict['NAME_FONT']}>\n"
             slmsg += f"\n📦  Ukuran: {size}\n"
-            slmsg += f"👥  diTambahkan Oleh: {tag}\n#️⃣  : <code>{user_id}</code>\n\n"
+            slmsg += f"👤  diTambahkan Oleh: {tag}\n#️⃣  : <code>{user_id}</code>\n\n"
         else:
             slmsg = f"╭ Name: <{config_dict['NAME_FONT']}>{escape(name)}</{config_dict['NAME_FONT']}>\n"
             slmsg += f"├ Size: {size}\n"
