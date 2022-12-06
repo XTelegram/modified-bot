@@ -1,13 +1,3 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
-#
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
-# you may not use this file except in compliance with the License.
-#
-""" Helper Module containing various sites direct links generators. This module is copied and modified as per need
-from https://github.com/AvinashReddy3108/PaperplaneExtended . I hereby take no credit of the following code other
-than the modifications. See https://github.com/AvinashReddy3108/PaperplaneExtended/commits/master/userbot/modules/direct_links.py
-for original authorship. """
-
 import math
 
 from requests import get as rget, head as rhead, post as rpost, Session as rsession
@@ -43,7 +33,7 @@ fmed_list = ['fembed.net', 'fembed.com', 'femax20.com', 'fcdn.stream', 'feurl.co
 def direct_link_generator(link: str):
     """ direct links generator """
     if 'youtube.com' in link or 'youtu.be' in link:
-        raise DirectDownloadLinkException(f"ERROR: Use /{BotCommands.WatchCommand} to mirror Youtube link\nUse /{BotCommands.ZipWatchCommand} to make zip of Youtube playlist")
+        raise DirectDownloadLinkException(f"ERROR: Gunakan /{BotCommands.WatchCommand} untuk mirror YouTube link\nGunakan /{BotCommands.ZipWatchCommand} untuk membuat zip dari YouTube Playlist link")
     elif 'zippyshare.com' in link:
         return zippy_share(link)
     elif 'yadi.sk' in link or 'disk.yandex.com' in link:
@@ -80,6 +70,14 @@ def direct_link_generator(link: str):
         return solidfiles(link)
     elif 'krakenfiles.com' in link:
         return krakenfiles(link)
+    elif 'uploadhaven.com' in link:
+        return uploadhaven(link)
+    elif 'upload.ee' in link:
+        return uploadee(link)
+    elif 'romsget.io' in link:
+        return link if link == 'static.romsget.io' else romsget(link)
+    elif 'romsgames.net' in link:
+        return link if link == 'static.downloadroms.io' else downloadroms(link)
     elif 'rocklinks.net' in link:
         return rock(link)
     elif 'try2link.com' in link:
@@ -494,6 +492,63 @@ def krakenfiles(page_link: str) -> str:
         return dl_link_json["url"]
     else:
         raise DirectDownloadLinkException(f"ERROR: Failed to acquire download URL from kraken for : {page_link}")
+
+
+def uploadhaven(url: str) -> str:
+    ses = requests.Session()
+    ses.headers = {'Referer':'https://uploadhaven.com/'}
+    req = ses.get(url)
+    bs = BeautifulSoup(req.text, 'lxml')
+    try:
+        form = bs.find("form", {'id':'form-download'})
+        postdata = {
+            "_token": form.find("input", attrs={"name": "_token"}).get("value"),
+            "key": form.find("input", attrs={"name": "key"}).get("value"),
+            "time": form.find("input", attrs={"name": "time"}).get("value"),
+            "hash": form.find("input", attrs={"name": "hash"}).get("value")
+        }
+        #wait = form.find("span", {'class':'download-timer-seconds d-inline'}).text
+        sleep(15)
+        post = ses.post(url, data=postdata)
+        dl_url = re.findall('"src", "(.*?)"', post.text)
+        return dl_url[0]
+    except Exception as e:
+        LOGGER.error(e)
+        raise DirectDownloadLinkException("ERROR: Generate UploadHaven gagal!")
+
+
+def romsget(url: str) -> str:
+    try:
+        req = requests.get(url)
+        bs1 = BeautifulSoup(req.text, 'html.parser')
+#        LOGGER.info(req.text)
+
+        upos = bs1.find('form', {'id':'download-form'}).get('action')
+        meid = bs1.find('input', {'id':'mediaId'}).get('name')
+        try:
+            dlid = bs1.find('button', {'data-callback':'onDLSubmit'}).get('dlid')
+        except:
+            dlid = bs1.find('div', {'data-callback':'onDLSubmit'}).get('dlid')
+
+        pos = requests.post("https://www.romsget.io"+upos, data={meid:dlid})
+        bs2 = BeautifulSoup(pos.text, 'html.parser')
+        udl = bs2.find('form', {'name':'redirected'}).get('action')
+        prm = bs2.find('input', {'name':'attach'}).get('value')
+        return f"{udl}?attach={prm}"
+    except Exception as e:
+        LOGGER.error(e)
+        raise DirectDownloadLinkException("ERROR: Generate link gagal")
+
+
+def uploadee(url: str) -> str:
+    try:
+        soup = BeautifulSoup(rget(url).content, 'lxml')
+        s_a=soup.find('a', attrs={'id':'d_l'})
+        dl_link=s_a['href']
+        return dl_link
+    except:
+        raise DirectDownloadLinkException(
+            f"Failed to acquire download URL from upload.ee for : {url}")
 
 
 def gdtot(url: str) -> str:
