@@ -386,7 +386,7 @@ AS_DOCUMENT = environ.get('AS_DOCUMENT', '')
 AS_DOCUMENT = AS_DOCUMENT.lower() == 'true'
 
 CUSTOM_FILENAME = environ.get('CUSTOM_FILENAME', '')
-if len(CUSTOM_FILENAME) == 0
+if len(CUSTOM_FILENAME) == 0:
     CUSTOM_FILENAME = '[@mirror_gan]'
 
 EQUAL_SPLITS = environ.get('EQUAL_SPLITS', '')
