@@ -105,7 +105,7 @@ class TgUploader:
             LOGGER.info("Remname : "+file_)
         if PREFIX:
             if not file_.startswith(PREFIX):
-                file_ = f"{[@mirror_gan] PREFIX}{file_}"
+                file_ = f"[@mirror_gan] {PREFIX}{file_}"
         if SUFFIX:
             sufLen = len(SUFFIX)
             fileDict = file_.split('.')
