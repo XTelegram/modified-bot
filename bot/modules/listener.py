@@ -224,7 +224,7 @@ class MirrorLeechListener:
             with download_dict_lock:
                 download_dict[self.uid] = upload_status
             update_all_messages()
-            drive.upload(up_name)
+            drive.upload(up_name, self.user_id)
 
 
     def onUploadComplete(self, link: str, size, files, folders, typ, name):
