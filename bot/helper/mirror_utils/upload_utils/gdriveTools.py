@@ -409,7 +409,7 @@ class GoogleDriveHelper:
                     url = short_url(url)
                     buttons.buildbutton("📥 Download", url)
             else:
-                file = self.__copyFile(meta.get('id'), config_dict['GDRIVE_ID'])
+                file = self.__copyFile(meta.get('id'), config_dict['GDRIVE_ID'], meta.get('name'), user_id)
                 if config_dict['EMOJI_THEME']:
                     msg += f'<b>🔤 ️ Nama: </b><code>{file.get("name")}</code>'
                 else:
