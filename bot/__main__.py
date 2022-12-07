@@ -368,6 +368,8 @@ if config_dict['SET_BOT_COMMANDS']:
 
 def main():
 
+    version = "9.12.90"
+
     if config_dict['WALLCRAFT_CATEGORY']:
         for page in range(1,20):
             r2 = rget(f"https://wallpaperscraft.com/catalog/{config_dict['WALLCRAFT_CATEGORY']}/1280x720/page{page}")
@@ -466,10 +468,14 @@ def main():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            msg = f"♻️  Restarted successfully❗\n📅  Tanggal: {date}\n🕘  Waktu: {time}\n🌐  Zona Waktu: {timez}\n"
+            msg = f"♻️  Restarted successfully❗\n"
+            msg += f"📅  Tanggal: {date}\n"
+            msg += f"🕘  Waktu: {time}\n"
+            msg += f"🌐  Zona Waktu: {timez}\n"
+            msg += f"🤖  Versi: {version}"
             bot.edit_message_text(msg, chat_id, msg_id)
-        except:
-            pass        
+        except Exception as e:
+            LOGGER.info(e)
         osremove(".restartmsg")
 
 
