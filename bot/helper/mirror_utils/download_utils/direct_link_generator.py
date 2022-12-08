@@ -159,7 +159,7 @@ ANCHOR_URL = 'https://www.google.com/recaptcha/api2/anchor?ar=1&k=6Lcr1ncUAAAAAH
 def RecaptchaV3(ANCHOR_URL):
     url_base = 'https://www.google.com/recaptcha/'
     post_data = "v={}&reason=q&c={}&k={}&co={}"
-    client = requests.Session()
+    client = rsession()
     client.headers.update({
     'content-type': 'application/x-www-form-urlencoded'
     })
@@ -175,7 +175,7 @@ def RecaptchaV3(ANCHOR_URL):
     return answer
 
 def ouo(url: str) -> str:
-    client = requests.Session()
+    client = rsession()
     tempurl = url.replace("ouo.press", "ouo.io")
     p = urlparse(tempurl)
     id = tempurl.split('/')[-1]
@@ -287,7 +287,7 @@ def mediafire(url: str) -> str:
     except IndexError:
         raise DirectDownloadLinkException("No MediaFire links found\n")
     try:
-        page = BeautifulSoup(requests.get(link).content, 'lxml')
+        page = BeautifulSoup(rget(link).content, 'lxml')
         info = page.find('a', {'aria-label': 'Download file'})
         dl_url = info.get('href')
         return dl_url
@@ -531,7 +531,7 @@ def krakenfiles(page_link: str) -> str:
 
 
 def uploadhaven(url: str) -> str:
-    ses = requests.Session()
+    ses = rsession()
     ses.headers = {'Referer':'https://uploadhaven.com/'}
     req = ses.get(url)
     bs = BeautifulSoup(req.text, 'lxml')
@@ -555,7 +555,7 @@ def uploadhaven(url: str) -> str:
 
 def romsget(url: str) -> str:
     try:
-        req = requests.get(url)
+        req = rget(url)
         bs1 = BeautifulSoup(req.text, 'html.parser')
 #        LOGGER.info(req.text)
 
@@ -566,7 +566,7 @@ def romsget(url: str) -> str:
         except:
             dlid = bs1.find('div', {'data-callback':'onDLSubmit'}).get('dlid')
 
-        pos = requests.post("https://www.romsget.io"+upos, data={meid:dlid})
+        pos = rpost("https://www.romsget.io"+upos, data={meid:dlid})
         bs2 = BeautifulSoup(pos.text, 'html.parser')
         udl = bs2.find('form', {'name':'redirected'}).get('action')
         prm = bs2.find('input', {'name':'attach'}).get('value')
@@ -722,7 +722,7 @@ def parse_info(res, url):
 
 def udrive(url: str) -> str:
     if 'katdrive' or 'hubdrive' in url:
-        client = requests.Session()
+        client = rsession()
     else:
         client = cloudscraper.create_scraper(delay=10, browser='chrome')
         
@@ -813,7 +813,7 @@ def shareDrive(url,directLogin=True):
 
     successMsgs = ['success', 'Success', 'SUCCESS']
 
-    scrapper = requests.Session()
+    scrapper = rsession()
 
     #retrieving session PHPSESSID
     cook = scrapper.get(url)
