@@ -21,6 +21,7 @@ lk21
 lxml
 mediainfo
 pillow
+playwright
 psutil
 pybase64
 pycountry
@@ -32,7 +33,6 @@ python-telegram-bot
 qbittorrent-api
 requests
 speedtest-cli
-selenium
 telegraph
 tenacity
 tgCrypto
