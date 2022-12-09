@@ -907,16 +907,14 @@ def filepress(link:str) -> str:
         return flink
 
 def terabox(url) -> str:
-    if not path.isfile('terabox.txt'):
-        raise DirectDownloadLinkException("ERROR: terabox.txt not found")
     try:
-        session = Session()
-        res = session.request('GET', url)
+        session = rsession()
+        res = rsession('GET', url)
         key = res.url.split('?surl=')[-1]
         jar = MozillaCookieJar('terabox.txt')
         jar.load()
-        session.cookies.update(jar)
-        res = session.request('GET', f'https://www.terabox.com/share/list?app_id=250528&shorturl={key}&root=1')
+        rsession.cookies.update(jar)
+        res = rsession('GET', f'https://www.terabox.com/share/list?app_id=250528&shorturl={key}&root=1')
         result = res.json()['list']
     except Exception as e:
         raise DirectDownloadLinkException(f"ERROR: {e.__class__.__name__}")
