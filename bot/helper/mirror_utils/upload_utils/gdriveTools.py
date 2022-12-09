@@ -22,6 +22,9 @@ from bot.helper.ext_utils.telegraph_helper import telegraph
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval, change_filename
 from bot.helper.ext_utils.fs_utils import get_mime_type
 from bot.helper.ext_utils.shortenurl import short_url
+from signal import signal, SIGPIPE, SIG_DFL 
+
+signal(SIGPIPE, SIG_DFL)
 
 LOGGER = getLogger(__name__)
 getLogger('googleapiclient.discovery').setLevel(ERROR)
