@@ -10,6 +10,8 @@ from cfscrape import create_scraper
 import cloudscraper
 from bs4 import BeautifulSoup
 from base64 import standard_b64encode, b64decode
+from http.cookiejar import MozillaCookieJar
+from os import path
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 from bot import LOGGER, config_dict
@@ -77,6 +79,8 @@ def direct_link_generator(link: str):
         return ez4(link)
     elif 'ouo.io' in link or 'ouo.press' in link:
         return ouo(link)
+    elif 'terabox' in domain:
+        return terabox(link)
     elif is_filepress_link(link):
         return filepress(link)
     elif is_gdtot_link(link):
@@ -901,3 +905,24 @@ def filepress(link:str) -> str:
     with sync_playwright() as playwright:
         flink = prun(playwright, link)
         return flink
+
+def terabox(url) -> str:
+    if not path.isfile('terabox.txt'):
+        raise DirectDownloadLinkException("ERROR: terabox.txt not found")
+    try:
+        session = Session()
+        res = session.request('GET', url)
+        key = res.url.split('?surl=')[-1]
+        jar = MozillaCookieJar('terabox.txt')
+        jar.load()
+        session.cookies.update(jar)
+        res = session.request('GET', f'https://www.terabox.com/share/list?app_id=250528&shorturl={key}&root=1')
+        result = res.json()['list']
+    except Exception as e:
+        raise DirectDownloadLinkException(f"ERROR: {e.__class__.__name__}")
+    if len(result) > 1:
+        raise DirectDownloadLinkException("ERROR: Can't download mutiple files")
+    result = result[0]
+    if result['isdir'] != '0':
+        raise DirectDownloadLinkException("ERROR: Can't download folder")
+    return result['dlink']
