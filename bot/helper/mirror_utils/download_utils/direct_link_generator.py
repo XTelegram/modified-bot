@@ -11,7 +11,7 @@ import cloudscraper
 from bs4 import BeautifulSoup
 from base64 import standard_b64encode, b64decode
 from http.cookiejar import MozillaCookieJar
-from os import path
+from os import path as isfile
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 from bot import LOGGER, config_dict
@@ -286,7 +286,7 @@ def uptobox(url: str) -> str:
 
 def mediafire(url: str) -> str:
     try:
-        link = re.findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
+        link = re_findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
         link = link.split('?dkey=')[0]
     except IndexError:
         raise DirectDownloadLinkException("No MediaFire links found\n")
@@ -550,7 +550,7 @@ def uploadhaven(url: str) -> str:
         #wait = form.find("span", {'class':'download-timer-seconds d-inline'}).text
         sleep(15)
         post = ses.post(url, data=postdata)
-        dl_url = re.findall('"src", "(.*?)"', post.text)
+        dl_url = re_findall('"src", "(.*?)"', post.text)
         return dl_url[0]
     except Exception as e:
         LOGGER.error(e)
@@ -907,6 +907,9 @@ def filepress(link:str) -> str:
         return flink
 
 def terabox(url) -> str:
+    if not isfile('terabox.txt'):
+        raise DirectDownloadLinkException("ERROR: terabox.txt not found")
+    try:
     try:
         session = rsession()
         res = rsession('GET', url)
