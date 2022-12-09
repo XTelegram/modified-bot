@@ -11,7 +11,7 @@ import cloudscraper
 from bs4 import BeautifulSoup
 from base64 import standard_b64encode, b64decode
 from http.cookiejar import MozillaCookieJar
-from os import path as ospatch
+from os import path as ospath
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 from bot import LOGGER, config_dict
