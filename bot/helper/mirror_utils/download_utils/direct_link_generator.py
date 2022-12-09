@@ -11,7 +11,7 @@ import cloudscraper
 from bs4 import BeautifulSoup
 from base64 import standard_b64encode, b64decode
 from http.cookiejar import MozillaCookieJar
-from os import path as isfile
+from os import path as ospatch
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 from bot import LOGGER, config_dict
@@ -907,9 +907,8 @@ def filepress(link:str) -> str:
         return flink
 
 def terabox(url) -> str:
-    if not isfile('terabox.txt'):
+    if not ospath.isfile('terabox.txt'):
         raise DirectDownloadLinkException("ERROR: terabox.txt not found")
-    try:
     try:
         session = rsession()
         res = rsession('GET', url)
