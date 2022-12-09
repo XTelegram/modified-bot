@@ -234,8 +234,12 @@ def _mirror_leech(bot, message, isZip=False, extract=False, isQbit=False, isLeec
                 is_filepress = is_filepress_link(link)
                 link = direct_link_generator(link)
                 LOGGER.info(f"Generated link: {link}")
+                if check_ != None:
+                    deleteMessage(bot, check_); check_ = None
             except DirectDownloadLinkException as e:
                 LOGGER.info(str(e))
+                if check_ != None:
+                    deleteMessage(bot, check_); check_ = None
                 if str(e).startswith('ERROR:'):
                     return sendMessage(str(e), bot, message)
     elif isQbit and not is_magnet(link):
