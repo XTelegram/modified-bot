@@ -79,7 +79,7 @@ def direct_link_generator(link: str):
         return ez4(link)
     elif 'ouo.io' in link or 'ouo.press' in link:
         return ouo(link)
-    elif 'terabox' in domain:
+    elif 'terabox' in link:
         return terabox(link)
     elif is_filepress_link(link):
         return filepress(link)
