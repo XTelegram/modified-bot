@@ -81,6 +81,10 @@ def direct_link_generator(link: str):
         return ouo(link)
     elif 'terabox' in link:
         return terabox(link)
+    elif 'wetransfer.com' in link:
+        return wetransfer(link)
+    elif 'gofile.io' in link:
+        return gofile(link)
     elif is_filepress_link(link):
         return filepress(link)
     elif is_gdtot_link(link):
@@ -926,3 +930,65 @@ def terabox(url) -> str:
     if result['isdir'] != '0':
         raise DirectDownloadLinkException("ERROR: Can't download folder")
     return result['dlink']
+
+def gofile(url: str) -> str:
+    api_uri = 'https://api.gofile.io'
+    client = requests.Session()
+    args = {'fileNum':0, 'password':''}
+
+    try:
+        if '--' in url:
+            _link = url.split('--')
+            url = _link[0]
+            for l in _link[1:]:
+                if 'pw:' in l:
+                    args['password'] = l.strip('pw:')
+                if 'fn:' in l:
+                    args['fileNum'] = int(l.strip('fn:'))
+
+        crtAcc = client.get(api_uri+'/createAccount').json()
+        data = {
+            'contentId': url.split('/')[-1],
+            'token': crtAcc['data']['token'],
+            'websiteToken': '12345',
+            'cache': 'true',
+            'password': sha256(args['password'].encode('utf-8')).hexdigest()
+        }
+        getCon = client.get(api_uri+'/getContent', params=data).json()
+    except:
+        raise DirectDownloadLinkException("ERROR: Tidak dapat mengambil direct link")
+
+    fileNum = args.get('fileNum')
+    if getCon['status'] == 'ok':
+        rstr = jsondumps(getCon)
+        link = re.findall(r'"link": "(.*?)"', rstr)
+        if fileNum > len(link):
+            fileNum = 0 #Force to first link
+    elif getCon['status'] == 'error-passwordWrong':
+        raise DirectDownloadLinkException(f"ERROR: Link ini memerlukan password!\n\n- Tambahkan <b>--pw:</b> setelah link dan ketik password filenya.\n\n<b>Contoh:</b>\n<code>/{BotCommands.MirrorCommand[0]} https://gofile.io/d/xyz--pw:love you</code>")
+    else:
+        raise DirectDownloadLinkException("ERROR: Generate link Gofile gagal!")
+
+    dl_url = link[fileNum] if fileNum == 0 else link[fileNum-1]
+    headers=f"""Host: {urlparse(dl_url).netloc}
+                Cookie: accountToken={data['token']}
+            """
+    return dl_url, headers
+
+def wetransfer(url):
+    """ WeTransfer direct link generator
+    By https://github.com/TheCaduceus/Link-Bypasser/ """
+    api = "https://api.emilyx.in/api"
+    client = cloudscraper.create_scraper(allow_brotli=False)
+    resp = client.get(url)
+    if resp.status_code == 404:
+        raise DirectDownloadLinkException("ERROR: File tidak ditemukan atau link yang kamu masukan salah!")
+    try:
+        resp = client.post(api, json={"type": "wetransfer", "url": url})
+        res = resp.json()
+    except BaseException:
+        raise DirectDownloadLinkException("ERROR: Server API sedang down atau link yang kamu masukan salah!")
+    if res["success"] is True:
+        return res["url"]
+    else:
+        raise DirectDownloadLinkException(f"ERROR: {res['msg']}")
