@@ -933,7 +933,7 @@ def terabox(url) -> str:
 
 def gofile(url: str) -> str:
     api_uri = 'https://api.gofile.io'
-    client = requests.Session()
+    client = rsession()
     args = {'fileNum':0, 'password':''}
 
     try:
@@ -961,7 +961,7 @@ def gofile(url: str) -> str:
     fileNum = args.get('fileNum')
     if getCon['status'] == 'ok':
         rstr = jsondumps(getCon)
-        link = re.findall(r'"link": "(.*?)"', rstr)
+        link = re_findall(r'"link": "(.*?)"', rstr)
         if fileNum > len(link):
             fileNum = 0 #Force to first link
     elif getCon['status'] == 'error-passwordWrong':
