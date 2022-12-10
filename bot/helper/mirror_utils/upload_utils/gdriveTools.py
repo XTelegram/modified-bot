@@ -297,7 +297,7 @@ class GoogleDriveHelper:
         return file_id
 
     @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(10),
-           retry=(retry_if_exception_type(HttpError)))
+           retry=(retry_if_exception_type(GCError) | retry_if_exception_type(IOError)))
     def __upload_file(self, file_path, file_name, mime_type, dest_id, user_id):
         # Change file name
         _ , file_name, _ = change_filename(file_name, user_id, all_edit=False, mirror_type=True)
